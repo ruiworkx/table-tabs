@@ -1,0 +1,77 @@
+.top-actions {
+
+  display: flex;
+  align-items: center;
+
+  .filter {
+    width: 200px;
+    margin: 10px;
+
+    .mat-mdc-form-field-subscript-wrapper{
+      display: none;
+    }
+  }
+
+}
+
+div.mat-elevation-z8 {
+
+  table {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  td, th {
+    width: 20%;
+
+    &.cdk-column-id {
+      width: 100px;
+    }
+
+    &.cdk-column-category {
+      width: 150px;
+    }
+
+    &.cdk-column-status {
+      width: 100px;
+    }
+
+    &.cdk-column-actions {
+      width: 150px;
+    }
+
+    .status-icon {
+      cursor: pointer;
+    }
+
+    .done-icon {
+      color: green;
+    }
+    .todo-icon {
+      color: orange;
+    }
+  }
+
+  th {
+    color: white;
+
+    .mat-sort-header-arrow {
+      color: white;
+    }
+  }
+
+  tr {
+    background-color: aliceblue;
+  }
+
+  thead tr {
+    background-color: steelblue;
+  }
+
+
+}

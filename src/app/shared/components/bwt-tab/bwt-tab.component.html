@@ -1,0 +1,77 @@
+<div class="top-actions">
+  <button class="create-btn" mat-flat-button color="primary" (click)="addRow()" cdkFocusInitial>New Item</button>
+
+  <mat-form-field class="filter">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+</div>
+<ng-container>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+      </ng-container>
+
+      <!-- Category Column -->
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+        <td mat-cell *matCellDef="let row"> {{row.category.name}} </td>
+      </ng-container>
+
+      <!-- Sub Category Column -->
+      <ng-container matColumnDef="subCategories">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sub Categories </th>
+        <td mat-cell *matCellDef="let row"> {{ row.subCategories | subCategoryNames }} </td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let row">
+          <span class="status-icon" (click)="$event.stopPropagation(); toggleStatus(row)">
+            <mat-icon *ngIf="row.status; else todoIcon" 
+              class="done-icon" aria-label="Done" matTooltip="Done">check_circle</mat-icon>
+            <ng-template #todoIcon>
+              <mat-icon aria-label="Pending" class="todo-icon" matTooltip="To Do">pending</mat-icon>
+            </ng-template>
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" (click)="$event.stopPropagation(); editRow(row)" 
+            matTooltip="Edit Item" aria-label="Edit Item">
+            <mat-icon aria-hidden="false" aria-label="Edit Todo Item" fontIcon="edit"></mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="$event.stopPropagation(); deleteRow(row)" 
+            matTooltip="Delete Item" aria-label="Delete Item">
+            <mat-icon aria-hidden="false" aria-label="Delete Todo Item" fontIcon="delete"></mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</ng-container>

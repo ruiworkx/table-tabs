@@ -1,0 +1,20 @@
+<ng-container *ngIf="todoList$ | async as todoList">
+  <mat-tab-group mat-align-tabs="start" class="todo-tabs">
+    <mat-tab label="All">
+      <app-bwt-tab [todoList]="todoList"
+        [displayedColumns]="['id', 'title', 'category', 'subCategories', 'status', 'actions']"></app-bwt-tab>
+    </mat-tab>
+    <mat-tab label="Business">
+      <app-bwt-tab [todoList]="todoList" [category]="'1'" 
+        [displayedColumns]="['id', 'title', 'subCategories', 'status', 'actions']"></app-bwt-tab>
+    </mat-tab>
+    <mat-tab label="Personal">
+      <app-bwt-tab [todoList]="todoList" [category]="'2'" 
+        [displayedColumns]="['id', 'title', 'category', 'subCategories', 'status', 'actions']"></app-bwt-tab>
+    </mat-tab>
+    <mat-tab label="Others">
+      <app-bwt-tab [todoList]="todoList" [category]="'3'" 
+        [displayedColumns]="['id', 'title', 'category', 'subCategories', 'status', 'actions']"></app-bwt-tab>
+    </mat-tab>
+  </mat-tab-group>
+</ng-container>

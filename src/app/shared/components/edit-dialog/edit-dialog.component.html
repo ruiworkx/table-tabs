@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>Edit ToDo Item</h1>
+
+<ng-container *ngIf="(categoryLists$ | async) as catLists">
+
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Id</mat-label>
+      <input matInput [(ngModel)]="localData.id" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="localData.title" required>
+    </mat-form-field>
+    <!-- <mat-form-field>
+      <mat-label>Status</mat-label>
+      <input matInput [(ngModel)]="localData.status">
+    </mat-form-field> -->
+
+    <div class="status-field">
+      <mat-label>Status</mat-label>
+      <mat-checkbox [(ngModel)]="localData.status">Done</mat-checkbox>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <mat-select [(ngModel)]="localData.category" [compareWith]="compareCategories"
+        (selectionChange)="onCategoryChange(localData.category.id, catLists.subCategories)">
+        <mat-option *ngFor="let category of catLists.categories" [value]="category">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      <mat-label>SubCategories</mat-label>
+      <mat-select [(ngModel)]="localData.subCategories" multiple [compareWith]="compareCategories">
+        <mat-option *ngFor="let subcategory of filteredSubcategories" [value]="subcategory">
+          {{ subcategory.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-flat-button color="primary" (click)="onOkClick()" cdkFocusInitial>Save</button>
+
+    <button mat-stroked-button color="accent" (click)="onNoClick()" class="cancel-btn">Cancel</button>
+    <!-- <button mat-button [mat-dialog-close]="localData" cdkFocusInitial>Ok</button> -->
+
+  </div>
+
+</ng-container>

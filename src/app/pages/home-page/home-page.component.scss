@@ -1,0 +1,8 @@
+.todo-tabs .mat-mdc-tab-header {
+  width: 50%;
+  min-width: 500px;
+
+  @media screen and (max-width: 720px) {
+    width: 100%;
+  }
+}
